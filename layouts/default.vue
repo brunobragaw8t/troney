@@ -16,10 +16,7 @@ const navItems = [
 
 const sbClient = useSupabaseClient()
 
-const signOutLoading = ref(false)
-
 async function signOut () {
-  signOutLoading.value = true
   await sbClient.auth.signOut()
   navigateTo('/auth')
 }
