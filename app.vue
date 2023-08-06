@@ -1,3 +1,11 @@
+<script setup lang="ts">
+useHead({
+  htmlAttrs: {
+    'data-bs-theme': 'dark'
+  }
+})
+</script>
+
 <template>
   <div>
     <NuxtWelcome />
