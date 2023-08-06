@@ -15,5 +15,8 @@
     "@types/node": "^18.17.1",
     "eslint": "^8.46.0",
     "nuxt": "^3.6.5"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.1"
   }
 }
