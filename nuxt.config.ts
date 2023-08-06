@@ -6,5 +6,12 @@ export default defineNuxtConfig({
       login: '/auth',
       callback: '/confirm'
     }
+  },
+  vite: {
+    vue: {
+      script: {
+        defineModel: true
+      }
+    }
   }
 })
