@@ -1,5 +1,16 @@
 <script setup lang="ts">
+const sbClient = useSupabaseClient()
 const route = useRoute()
+
+const welcome = ref<string>('')
+
+sbClient.auth.getUser().then((user) => {
+  if (user.error) {
+    return
+  }
+
+  welcome.value = `Hi, ${user.data.user.user_metadata.name.split(' ')[0]}`
+})
 
 const navItems = [
   {
@@ -14,8 +25,6 @@ const navItems = [
   }
 ]
 
-const sbClient = useSupabaseClient()
-
 async function signOut () {
   await sbClient.auth.signOut()
   navigateTo('/auth')
@@ -25,9 +34,9 @@ async function signOut () {
 <template>
   <div class="d-flex min-vh-100">
     <div class="py-5 bg-secondary-subtle" style="width: 200px">
-      <h4 class="mb-3 px-3">
-        Troney
-      </h4>
+      <h5 class="mb-3 px-3">
+        {{ welcome }}
+      </h5>
 
       <ul v-if="navItems.length" class="list-group list-group-flush">
         <NuxtLink
