@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { User } from '@supabase/gotrue-js'
 import { Database } from 'types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
+const user = useSupabaseUser() as { value: User }
 
 const payload = ref({
   name: '',
@@ -18,22 +20,9 @@ const alert = ref({
 async function createWallet () {
   isLoading.value = true
 
-  const user = await sbClient.auth.getUser()
-
-  if (user.error) {
-    isLoading.value = false
-
-    alert.value = {
-      type: 'danger',
-      message: user.error.message
-    }
-
-    return user.error
-  }
-
   const { data, error } = await sbClient.from('wallets')
     .insert([{
-      user_id: user.data.user.id,
+      user_id: user.value.id,
       name: payload.value.name,
       initial_balance: payload.value.initialBalance
     }])

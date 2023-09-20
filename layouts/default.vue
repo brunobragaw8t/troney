@@ -1,16 +1,11 @@
 <script setup lang="ts">
+import { User } from '@supabase/gotrue-js'
+
 const sbClient = useSupabaseClient()
+const user = useSupabaseUser() as { value: User }
 const route = useRoute()
 
-const welcome = ref<string>('')
-
-sbClient.auth.getUser().then((user) => {
-  if (user.error) {
-    return
-  }
-
-  welcome.value = `Hi, ${user.data.user.user_metadata.name.split(' ')[0]}`
-})
+const welcome = ref<string>(`Hi, ${user.value.user_metadata.name}`)
 
 const navItems = [
   {
