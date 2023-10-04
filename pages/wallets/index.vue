@@ -5,10 +5,27 @@ import { Database } from 'types/supabase'
 const sbClient = useSupabaseClient<Database>()
 const user = useSupabaseUser() as { value: User }
 
-const { data: wallets, error } = await sbClient
+const { data, error } = await sbClient
   .from('wallets')
   .select()
   .eq('user_id', user.value.id)
+
+const wallets = computed(() => {
+  if (error) {
+    return []
+  }
+
+  return data.map((wallet) => {
+    return {
+      ...wallet,
+      displayDeleteModal: ref(false)
+    }
+  })
+})
+
+function deleteWallet () {
+  console.log('Delete this wallet')
+}
 </script>
 
 <template>
@@ -55,6 +72,17 @@ const { data: wallets, error } = await sbClient
                 icon="fas fa-trash"
                 size="sm"
                 variant="danger"
+                @click="wallet.displayDeleteModal.value = true"
+              />
+
+              <AppModal
+                v-if="wallet.displayDeleteModal.value"
+                title="Delete wallet"
+                description="Are you sure you want to delete this wallet? This action is irreversible"
+                :button-callback="deleteWallet"
+                button-label="Delete"
+                button-variant="danger"
+                @close="wallet.displayDeleteModal.value = false"
               />
             </div>
           </td>
