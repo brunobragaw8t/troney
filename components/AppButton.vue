@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { ButtonIconPosition, ButtonVariant } from 'types/button'
+
 withDefaults(defineProps<{
   tag: string
   label?: string
   icon?: string
-  iconPosition?: 'left' | 'right'
+  iconPosition?: ButtonIconPosition
   size?: 'sm' | 'md' | 'lg'
-  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark'
+  variant?: ButtonVariant
   loading?: boolean
 }>(), {
   label: '',
