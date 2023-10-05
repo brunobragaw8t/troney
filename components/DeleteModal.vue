@@ -4,7 +4,8 @@ import { ButtonIconPosition, ButtonVariant } from 'types/button'
 withDefaults(defineProps<{
   title?: string
   description?: string
-  buttonCallback:() => void
+  buttonCallback:(subject: any) => void
+  subject: any
   buttonLabel: string
   buttonIcon?: string
   buttonIconPosition?: ButtonIconPosition
@@ -66,7 +67,8 @@ const emit = defineEmits<{
             :icon="buttonIcon"
             :icon-position="buttonIconPosition"
             :variant="buttonVariant"
-            @click="buttonCallback"
+            :loading="buttonLoading"
+            @click="buttonCallback(subject)"
           />
         </div>
       </div>
