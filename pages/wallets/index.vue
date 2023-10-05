@@ -5,27 +5,97 @@ import { Database } from 'types/supabase'
 const sbClient = useSupabaseClient<Database>()
 const user = useSupabaseUser() as { value: User }
 
-const { data, error } = await sbClient
-  .from('wallets')
-  .select()
-  .eq('user_id', user.value.id)
+/**
+ * Types
+ */
 
-const wallets = computed(() => {
-  if (error) {
-    return []
-  }
+type WalletListItem = Database['public']['Tables']['wallets']['Row'] & {
+  displayDeleteModal: boolean
+  deleting: boolean
+}
 
-  return data.map((wallet) => {
-    return {
-      ...wallet,
-      displayDeleteModal: ref(false)
-    }
-  })
+/**
+ * States
+ */
+
+const wallets = ref<WalletListItem[]>([])
+
+const alert = ref({
+  type: '',
+  message: ''
 })
 
-function deleteWallet () {
-  console.log('Delete this wallet')
+function closeDeletionModals () {
+  wallets.value.forEach((w) => { w.displayDeleteModal = false })
 }
+
+/**
+ * Actions
+ */
+
+async function fetchWallets () {
+  const { data, error } = await sbClient
+    .from('wallets')
+    .select()
+    .eq('user_id', user.value.id)
+
+  if (error) {
+    wallets.value = []
+    return
+  }
+
+  wallets.value = data.map((wallet) => {
+    return {
+      ...wallet,
+      displayDeleteModal: false,
+      deleting: false
+    }
+  })
+}
+
+async function deleteWallet (id: number) {
+  alert.value.type = ''
+  alert.value.message = ''
+
+  const wallet = wallets.value.find(w => w.id === id)
+
+  if (!wallet) {
+    alert.value.type = 'danger'
+    alert.value.message = 'An error occurred while tyring to delete your wallet.'
+    closeDeletionModals()
+    return
+  }
+
+  wallet.deleting = true
+
+  const { error } = await sbClient
+    .from('wallets')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    alert.value.type = 'danger'
+    alert.value.message = error.message
+    wallet.displayDeleteModal = false
+    wallet.deleting = false
+    return
+  }
+
+  wallet.displayDeleteModal = false
+  wallet.deleting = false
+  alert.value.type = 'success'
+  alert.value.message = `Wallet ${wallet.name} deleted successfully.`
+
+  fetchWallets()
+}
+
+/**
+ * Lifecycle
+ */
+
+onMounted(() => {
+  fetchWallets()
+})
 </script>
 
 <template>
@@ -44,50 +114,58 @@ function deleteWallet () {
       />
     </div>
 
-    <div v-if="!wallets || error">
+    <div v-if="!wallets.length">
       No wallets
     </div>
 
-    <table v-else class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Name</th>
+    <template v-else>
+      <div v-if="alert.message" :class="`alert alert-${alert.type}`">
+        {{ alert.message }}
+      </div>
 
-          <th class="text-end">
-            Actions
-          </th>
-        </tr>
-      </thead>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
 
-      <tbody>
-        <tr v-for="wallet in wallets" :key="wallet.id">
-          <td>{{ wallet.name }}</td>
+            <th class="text-end">
+              Actions
+            </th>
+          </tr>
+        </thead>
 
-          <td>
-            <div class="d-flex justify-content-end gap-2">
-              <AppButton tag="button" icon="fas fa-edit" size="sm" />
+        <tbody>
+          <tr v-for="wallet in wallets" :key="wallet.id">
+            <td>{{ wallet.name }}</td>
 
-              <AppButton
-                tag="button"
-                icon="fas fa-trash"
-                size="sm"
-                variant="danger"
-                @click="wallet.displayDeleteModal.value = true"
-              />
+            <td>
+              <div class="d-flex justify-content-end gap-2">
+                <AppButton tag="button" icon="fas fa-edit" size="sm" />
 
-              <AppModal
-                v-if="wallet.displayDeleteModal.value"
-                title="Delete wallet"
-                description="Are you sure you want to delete this wallet? This action is irreversible"
-                :button-callback="deleteWallet"
-                button-label="Delete"
-                button-variant="danger"
-                @close="wallet.displayDeleteModal.value = false"
-              />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                <AppButton
+                  tag="button"
+                  icon="fas fa-trash"
+                  size="sm"
+                  variant="danger"
+                  @click="wallet.displayDeleteModal = true"
+                />
+
+                <DeleteModal
+                  v-if="wallet.displayDeleteModal"
+                  title="Delete wallet"
+                  description="Are you sure you want to delete this wallet? This action is irreversible"
+                  :button-callback="deleteWallet"
+                  :subject="wallet.id"
+                  button-label="Delete"
+                  button-variant="danger"
+                  :button-loading="wallet.deleting"
+                  @close="wallet.displayDeleteModal = false"
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
   </div>
 </template>
