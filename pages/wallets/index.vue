@@ -140,7 +140,12 @@ onMounted(() => {
 
             <td>
               <div class="d-flex justify-content-end gap-2">
-                <AppButton tag="button" icon="fas fa-edit" size="sm" />
+                <AppButton
+                  tag="a"
+                  icon="fas fa-edit"
+                  size="sm"
+                  :href="`/wallets/${wallet.id}`"
+                />
 
                 <AppButton
                   tag="button"
