@@ -33,6 +33,14 @@ function closeDeletionModals () {
  * Actions
  */
 
+function goToAddWallet (e: KeyboardEvent) {
+  if (!e.shiftKey || e.key !== 'N') {
+    return
+  }
+
+  navigateTo('/wallets/create')
+}
+
 async function fetchWallets () {
   const { data, error } = await sbClient
     .from('wallets')
@@ -95,6 +103,11 @@ async function deleteWallet (id: number) {
 
 onMounted(() => {
   fetchWallets()
+  window.addEventListener('keypress', goToAddWallet)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keypress', goToAddWallet)
 })
 </script>
 
