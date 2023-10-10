@@ -17,6 +17,11 @@ const navItems = [
     label: 'Wallets',
     icon: 'fas fa-wallet',
     to: '/wallets'
+  },
+  {
+    label: 'Categories',
+    icon: 'far fa-folder-open',
+    to: '/categories'
   }
 ]
 
