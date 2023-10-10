@@ -1,24 +1,13 @@
 <script setup lang="ts">
-import { User } from '@supabase/gotrue-js'
 import { Database } from 'types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
-const user = useSupabaseUser() as { value: User }
-
-/**
- * Types
- */
-
-type WalletListItem = Database['public']['Tables']['wallets']['Row'] & {
-  displayDeleteModal: boolean
-  deleting: boolean
-}
 
 /**
  * States
  */
 
-const wallets = ref<WalletListItem[]>([])
+const wallets = useWallets().wallets
 
 const alert = ref({
   type: '',
@@ -32,26 +21,6 @@ function closeDeletionModals () {
 /**
  * Actions
  */
-
-async function fetchWallets () {
-  const { data, error } = await sbClient
-    .from('wallets')
-    .select()
-    .eq('user_id', user.value.id)
-
-  if (error) {
-    wallets.value = []
-    return
-  }
-
-  wallets.value = data.map((wallet) => {
-    return {
-      ...wallet,
-      displayDeleteModal: false,
-      deleting: false
-    }
-  })
-}
 
 async function deleteWallet (id: number) {
   alert.value.type = ''
@@ -85,17 +54,7 @@ async function deleteWallet (id: number) {
   wallet.deleting = false
   alert.value.type = 'success'
   alert.value.message = `Wallet ${wallet.name} deleted successfully.`
-
-  fetchWallets()
 }
-
-/**
- * Lifecycle
- */
-
-onMounted(() => {
-  fetchWallets()
-})
 </script>
 
 <template>
