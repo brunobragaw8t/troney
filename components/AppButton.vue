@@ -45,8 +45,8 @@ const height = computed(() => {
     :is="componentIs"
     :class="`btn btn-${variant} btn-${size} d-inline-flex align-items-center`"
     :disabled="loading"
-    :to="to"
-    :href="href"
+    :to="to || undefined"
+    :href="href || undefined"
   >
     <div v-if="loading" class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
