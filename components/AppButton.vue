@@ -2,7 +2,8 @@
 import type { ButtonIconPosition, ButtonVariant } from '~/types/button'
 
 const props = withDefaults(defineProps<{
-  tag: string
+  to?: string
+  href?: string
   label?: string
   icon?: string
   iconPosition?: ButtonIconPosition
@@ -10,11 +11,21 @@ const props = withDefaults(defineProps<{
   variant?: ButtonVariant
   loading?: boolean
 }>(), {
+  to: '',
+  href: '',
   label: '',
   icon: '',
   iconPosition: 'left',
   size: 'md',
   variant: 'primary'
+})
+
+const componentIs = computed(() => {
+  if (props.to || props.href) {
+    return defineNuxtLink({})
+  }
+
+  return 'button'
 })
 
 const height = computed(() => {
@@ -31,9 +42,11 @@ const height = computed(() => {
 
 <template>
   <component
-    :is="tag"
+    :is="componentIs"
     :class="`btn btn-${variant} btn-${size} d-inline-flex align-items-center`"
     :disabled="loading"
+    :to="to"
+    :href="href"
   >
     <div v-if="loading" class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>

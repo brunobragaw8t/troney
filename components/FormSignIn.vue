@@ -71,7 +71,7 @@ async function signIn () {
     </div>
 
     <div class="d-flex justify-content-end">
-      <AppButton tag="button" type="submit" label="Sign in" :loading="isLoading" />
+      <AppButton type="submit" label="Sign in" :loading="isLoading" />
     </div>
   </form>
 </template>

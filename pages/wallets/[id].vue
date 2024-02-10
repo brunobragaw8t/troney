@@ -124,7 +124,7 @@ onMounted(() => {
       </div>
 
       <div class="d-flex justify-content-end">
-        <AppButton tag="button" type="submit" label="Update wallet" :loading="isUpdating" />
+        <AppButton type="submit" label="Update wallet" :loading="isUpdating" />
       </div>
     </form>
   </div>

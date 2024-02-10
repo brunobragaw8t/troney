@@ -66,11 +66,10 @@ async function deleteWallet (id: number) {
 
       <AppButton
         v-keymap="'N'"
-        tag="a"
         label="Create"
         icon="fa6-solid:circle-plus"
         icon-position="right"
-        href="/wallets/create"
+        to="/wallets/create"
       />
     </div>
 
@@ -101,14 +100,12 @@ async function deleteWallet (id: number) {
             <td>
               <div class="d-flex justify-content-end gap-2">
                 <AppButton
-                  tag="a"
+                  :to="`/wallets/${wallet.id}`"
                   icon="fa6-solid:pen-to-square"
                   size="sm"
-                  :href="`/wallets/${wallet.id}`"
                 />
 
                 <AppButton
-                  tag="button"
                   icon="fa6-solid:trash"
                   size="sm"
                   variant="danger"

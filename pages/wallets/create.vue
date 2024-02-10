@@ -83,7 +83,7 @@ async function createWallet () {
       </div>
 
       <div class="d-flex justify-content-end">
-        <AppButton tag="button" type="submit" label="Create wallet" :loading="isLoading" />
+        <AppButton type="submit" label="Create wallet" :loading="isLoading" />
       </div>
     </form>
   </div>

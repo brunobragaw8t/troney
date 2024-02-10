@@ -62,7 +62,6 @@ const emit = defineEmits<{
           </button>
 
           <AppButton
-            tag="button"
             :label="buttonLabel"
             :icon="buttonIcon"
             :icon-position="buttonIconPosition"

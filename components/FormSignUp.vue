@@ -94,7 +94,7 @@ async function signUp () {
     </div>
 
     <div class="d-flex justify-content-end">
-      <AppButton tag="button" type="submit" label="Sign up" :loading="isLoading" />
+      <AppButton type="submit" label="Sign up" :loading="isLoading" />
     </div>
   </form>
 </template>
