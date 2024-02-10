@@ -19,6 +19,11 @@ const navItems = [
     to: '/wallets'
   },
   {
+    label: 'Buckets',
+    icon: 'fa6-solid:bucket',
+    to: '/buckets'
+  },
+  {
     label: 'Categories',
     icon: 'fa6-regular:folder-open',
     to: '/categories'
