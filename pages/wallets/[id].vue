@@ -34,7 +34,12 @@ async function fetchWallet () {
     .eq('id', route.params.id)
     .eq('user_id', user.value.id)
 
-  if (error || !data[0] || !data[0].name || !data[0].initial_balance) {
+  if (
+    error ||
+    !data[0] ||
+    data[0].name === null ||
+    data[0].initial_balance === null
+  ) {
     navigateTo('/wallets')
     return
   }
