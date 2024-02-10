@@ -20,7 +20,7 @@ const value = defineModel()
 <template>
   <div class="input-group">
     <span v-if="icon" class="input-group-text">
-      <i :class="icon" />
+      <Icon :name="icon" />
     </span>
 
     <div v-if="label" class="form-floating">

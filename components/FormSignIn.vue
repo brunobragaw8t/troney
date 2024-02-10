@@ -49,7 +49,7 @@ async function signIn () {
         type="email"
         placeholder="example@email.com"
         label="Email"
-        icon="far fa-envelope"
+        icon="fa6-regular:envelope"
         :required="true"
         :focus="true"
       />
@@ -61,7 +61,7 @@ async function signIn () {
         type="password"
         placeholder="Your secret password"
         label="Password"
-        icon="fas fa-key"
+        icon="fa6-solid:key"
         :required="true"
       />
     </div>

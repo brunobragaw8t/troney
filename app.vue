@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { User } from '@supabase/gotrue-js'
-import { Database } from 'types/supabase'
+import type { User } from '@supabase/gotrue-js'
+import type { Database } from './types/supabase'
 
 useHead({
   htmlAttrs: {

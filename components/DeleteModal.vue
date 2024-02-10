@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ButtonIconPosition, ButtonVariant } from 'types/button'
+import type { ButtonIconPosition, ButtonVariant } from '~/types/button'
 
 withDefaults(defineProps<{
   title?: string

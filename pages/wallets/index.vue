@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Database } from 'types/supabase'
+import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
 
@@ -68,7 +68,7 @@ async function deleteWallet (id: number) {
         v-keymap="'N'"
         tag="a"
         label="Create"
-        icon="fas fa-circle-plus"
+        icon="fa6-solid:circle-plus"
         icon-position="right"
         href="/wallets/create"
       />
@@ -102,14 +102,14 @@ async function deleteWallet (id: number) {
               <div class="d-flex justify-content-end gap-2">
                 <AppButton
                   tag="a"
-                  icon="fas fa-edit"
+                  icon="fa6-solid:pen-to-square"
                   size="sm"
                   :href="`/wallets/${wallet.id}`"
                 />
 
                 <AppButton
                   tag="button"
-                  icon="fas fa-trash"
+                  icon="fa6-solid:trash"
                   size="sm"
                   variant="danger"
                   @click="wallet.displayDeleteModal = true"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { User } from '@supabase/gotrue-js'
-import { Database } from 'types/supabase'
+import type { User } from '@supabase/gotrue-js'
+import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
 const user = useSupabaseUser() as { value: User }
@@ -62,7 +62,7 @@ async function createWallet () {
           v-model="payload.name"
           type="text"
           label="Name"
-          icon="fas fa-wallet"
+          icon="fa6-solid:wallet"
           :required="true"
           :focus="true"
         />
@@ -73,7 +73,7 @@ async function createWallet () {
           v-model="payload.initialBalance"
           type="number"
           label="Initial balance"
-          icon="far fa-money-bill"
+          icon="fa6-regular:money-bill-1"
           :required="true"
         />
       </div>

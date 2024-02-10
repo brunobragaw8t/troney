@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ButtonIconPosition, ButtonVariant } from 'types/button'
+import type { ButtonIconPosition, ButtonVariant } from '~/types/button'
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   tag: string
   label?: string
   icon?: string
@@ -16,29 +16,48 @@ withDefaults(defineProps<{
   size: 'md',
   variant: 'primary'
 })
+
+const height = computed(() => {
+  switch (props.size) {
+    case 'sm':
+      return '1.25rem'
+    case 'lg':
+      return '1.875rem'
+    default:
+      return '1.5rem'
+  }
+})
 </script>
 
 <template>
   <component
     :is="tag"
-    :class="`btn btn-${variant} btn-${size}`"
+    :class="`btn btn-${variant} btn-${size} d-inline-flex align-items-center`"
     :disabled="loading"
   >
     <div v-if="loading" class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
 
-    <i
+    <div
       v-if="icon && 'left' === iconPosition"
-      :class="[icon, label ? 'me-1' : '']"
-    />
+      :style="`height: ${height};`"
+      class="d-flex align-items-center"
+      :class="label ? 'me-2' : ''"
+    >
+      <Icon :name="icon" />
+    </div>
 
-    {{ label }}
+    <span>{{ label }}</span>
 
-    <i
+    <div
       v-if="icon && 'right' === iconPosition"
-      :class="[icon, label ? 'ms-1' : '']"
-    />
+      :style="`height: ${height};`"
+      class="d-flex align-items-center"
+      :class="label ? 'ms-2' : ''"
+    >
+      <Icon :name="icon" />
+    </div>
   </component>
 </template>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { User } from '@supabase/gotrue-js'
+import type { User } from '@supabase/gotrue-js'
 
 const sbClient = useSupabaseClient()
 const user = useSupabaseUser() as { value: User }
@@ -10,17 +10,17 @@ const welcome = ref<string>(`Hi, ${user.value.user_metadata.name}`)
 const navItems = [
   {
     label: 'Home',
-    icon: 'fas fa-home',
+    icon: 'fa6-solid:house',
     to: '/'
   },
   {
     label: 'Wallets',
-    icon: 'fas fa-wallet',
+    icon: 'fa6-solid:wallet',
     to: '/wallets'
   },
   {
     label: 'Categories',
-    icon: 'far fa-folder-open',
+    icon: 'fa6-regular:folder-open',
     to: '/categories'
   }
 ]
@@ -47,7 +47,7 @@ async function signOut () {
           :class="{ active: route.path === item.to }"
         >
           <span>{{ item.label }}</span>
-          <i :class="item.icon" />
+          <Icon :name="item.icon" />
         </NuxtLink>
 
         <NuxtLink
@@ -58,7 +58,7 @@ async function signOut () {
           <span><small>Sign out</small></span>
 
           <small>
-            <i class="fas fa-sign-out" />
+            <Icon name="fa6-solid:arrow-right-from-bracket" />
           </small>
         </NuxtLink>
       </ul>

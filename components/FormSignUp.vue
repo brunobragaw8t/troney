@@ -61,7 +61,7 @@ async function signUp () {
         type="text"
         placeholder="Your name"
         label="Name"
-        icon="far fa-user"
+        icon="fa6-regular:user"
         :required="true"
         :focus="true"
       />
@@ -73,7 +73,7 @@ async function signUp () {
         type="email"
         placeholder="example@email.com"
         label="Email"
-        icon="far fa-envelope"
+        icon="fa6-regular:envelope"
         :required="true"
       />
     </div>
@@ -84,7 +84,7 @@ async function signUp () {
         type="password"
         placeholder="Your secret password"
         label="Password"
-        icon="fas fa-key"
+        icon="fa6-solid:key"
         :required="true"
       />
     </div>
