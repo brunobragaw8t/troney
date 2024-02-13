@@ -100,7 +100,7 @@ async function deleteItem (id: number) {
             <td>
               <div class="d-flex justify-content-end gap-2">
                 <AppButton
-                  :to="`/items/${item.id}`"
+                  :to="`/buckets/${item.id}`"
                   icon="fa6-solid:pen-to-square"
                   size="sm"
                 />
