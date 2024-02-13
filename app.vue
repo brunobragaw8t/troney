@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { User } from '@supabase/gotrue-js'
 import type { Database } from './types/supabase'
 
 useHead({
@@ -9,13 +8,11 @@ useHead({
 })
 
 const sbClient = useSupabaseClient<Database>()
-const user = useSupabaseUser() as { value: User }
 
 async function fetchWallets () {
   const { data, error } = await sbClient
     .from('wallets')
     .select()
-    .eq('user_id', user.value.id)
 
   if (error) {
     return
@@ -36,7 +33,6 @@ async function fetchBuckets () {
   const { data, error } = await sbClient
     .from('buckets')
     .select()
-    .eq('user_id', user.value.id)
 
   if (error) {
     return

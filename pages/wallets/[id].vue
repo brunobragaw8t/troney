@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { User } from '@supabase/gotrue-js'
 import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
-const user = useSupabaseUser() as { value: User }
 const route = useRoute()
 
 /**
@@ -32,7 +30,6 @@ async function fetchWallet () {
     .from('wallets')
     .select()
     .eq('id', route.params.id)
-    .eq('user_id', user.value.id)
 
   if (
     error ||
@@ -59,7 +56,6 @@ async function updateWallet () {
       initial_balance: payload.value.initialBalance
     })
     .eq('id', route.params.id)
-    .eq('user_id', user.value.id)
     .select()
 
   if (error) {
