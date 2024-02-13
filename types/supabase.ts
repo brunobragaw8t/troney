@@ -44,37 +44,31 @@ export type Database = {
           }
         ]
       }
-      transaction_categories: {
+      categories: {
         Row: {
-          budget: number | null
           created_at: string
           id: number
           name: string
-          parent: number | null
-          updated_at: string | null
+          update_at: string | null
           user_id: string
         }
         Insert: {
-          budget?: number | null
           created_at?: string
           id?: number
           name: string
-          parent?: number | null
-          updated_at?: string | null
-          user_id: string
+          update_at?: string | null
+          user_id?: string
         }
         Update: {
-          budget?: number | null
           created_at?: string
           id?: number
           name?: string
-          parent?: number | null
-          updated_at?: string | null
+          update_at?: string | null
           user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: 'transaction_categories_user_id_fkey'
+            foreignKeyName: 'categories_user_id_fkey'
             columns: ['user_id']
             isOneToOne: false
             referencedRelation: 'users'

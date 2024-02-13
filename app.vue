@@ -53,20 +53,19 @@ async function fetchBuckets () {
   )
 }
 
-async function fetchTransactionCategories () {
+async function fetchCategories () {
   const { data, error } = await sbClient
-    .from('transaction_categories')
+    .from('categories')
     .select()
-    .eq('user_id', user.value.id)
 
   if (error) {
     return
   }
 
-  useTransactionCategories().setTransactionCategories(
-    data.map((transactionCategory) => {
+  useCategories().setItems(
+    data.map((item) => {
       return {
-        ...transactionCategory,
+        ...item,
         displayDeleteModal: false,
         deleting: false
       }
@@ -76,7 +75,7 @@ async function fetchTransactionCategories () {
 
 fetchWallets()
 fetchBuckets()
-fetchTransactionCategories()
+fetchCategories()
 </script>
 
 <template>
