@@ -8,9 +8,31 @@ type BucketListItem = Database['public']['Tables']['buckets']['Row'] & {
 export const useBuckets = () => {
   const items = useState<BucketListItem[]>('buckets', () => [])
 
+  async function fetchItems () {
+    const sbClient = useSupabaseClient<Database>()
+
+    const { data, error } = await sbClient
+      .from('buckets')
+      .select()
+
+    if (error) {
+      return
+    }
+
+    if (data) {
+      setItems(
+        data.map(item => ({
+          ...item,
+          displayDeleteModal: false,
+          deleting: false
+        }))
+      )
+    }
+  }
+
   function setItems (data: BucketListItem[]) {
     items.value = data
   }
 
-  return { items, setItems }
+  return { items, fetchItems, setItems }
 }

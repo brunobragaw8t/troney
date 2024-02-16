@@ -6,11 +6,33 @@ type WalletListItem = Database['public']['Tables']['wallets']['Row'] & {
 }
 
 export const useWallets = () => {
-  const wallets = useState<WalletListItem[]>('wallets', () => [])
+  const items = useState<WalletListItem[]>('wallets', () => [])
 
-  function setWallets (data: WalletListItem[]) {
-    wallets.value = data
+  async function fetchItems () {
+    const sbClient = useSupabaseClient<Database>()
+
+    const { data, error } = await sbClient
+      .from('wallets')
+      .select()
+
+    if (error) {
+      return
+    }
+
+    if (data) {
+      setItems(
+        data.map(item => ({
+          ...item,
+          displayDeleteModal: false,
+          deleting: false
+        }))
+      )
+    }
   }
 
-  return { wallets, setWallets }
+  function setItems (data: WalletListItem[]) {
+    items.value = data
+  }
+
+  return { items, fetchItems, setItems }
 }
