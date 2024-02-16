@@ -1,4 +1,4 @@
-import { Database } from 'types/supabase'
+import { type Database } from '~/types/supabase'
 
 type WalletListItem = Database['public']['Tables']['wallets']['Row'] & {
   displayDeleteModal: boolean
