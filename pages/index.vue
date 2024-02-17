@@ -48,6 +48,7 @@ function nextMonth () {
 
       <div class="d-flex gap-1">
         <AppButton
+          v-keymap="'H'"
           label="Previous"
           size="sm"
           variant="secondary"
@@ -55,6 +56,7 @@ function nextMonth () {
         />
 
         <AppButton
+          v-keymap="'L'"
           label="Next"
           size="sm"
           variant="secondary"
