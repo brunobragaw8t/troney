@@ -39,11 +39,13 @@ function nextMonth () {
     month.value++
   }
 }
+
+const wallets = useWallets().items
 </script>
 
 <template>
   <div>
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between mb-4">
       <h2>{{ monthName }} {{ year }}</h2>
 
       <div class="d-flex gap-1">
@@ -63,6 +65,16 @@ function nextMonth () {
           @click="nextMonth"
         />
       </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <WalletCard
+        v-for="w in wallets"
+        :key="w.id"
+        :name="w.name"
+        :balance="w.initial_balance"
+        class="flex-fill"
+      />
     </div>
 
     <p>{{ route.query }}</p>
