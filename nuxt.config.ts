@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   devtools: {
     enabled: false
   },
-  modules: ['@nuxtjs/supabase', 'nuxt-icon'],
+  modules: ['@nuxtjs/supabase', 'nuxt-icon', 'nuxt-vitest'],
   supabase: {
     redirectOptions: {
       login: '/auth',
