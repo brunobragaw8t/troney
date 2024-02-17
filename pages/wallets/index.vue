@@ -7,7 +7,7 @@ const sbClient = useSupabaseClient<Database>()
  * States
  */
 
-const wallets = useWallets().wallets
+const wallets = useWallets().items
 
 const alert = ref({
   type: '',
