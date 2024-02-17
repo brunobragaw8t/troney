@@ -51,7 +51,7 @@ const wallets = useWallets().items
       <div class="d-flex gap-1">
         <AppButton
           v-keymap="'H'"
-          label="Previous"
+          icon="fa6-solid:angle-left"
           size="sm"
           variant="secondary"
           @click="previousMonth"
@@ -59,7 +59,8 @@ const wallets = useWallets().items
 
         <AppButton
           v-keymap="'L'"
-          label="Next"
+          icon="fa6-solid:angle-right"
+          icon-position="right"
           size="sm"
           variant="secondary"
           @click="nextMonth"
