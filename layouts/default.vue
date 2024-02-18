@@ -14,6 +14,11 @@ const navItems = [
     to: '/'
   },
   {
+    label: 'Earnings',
+    icon: 'fa6-solid:circle-dollar-to-slot',
+    to: '/earnings'
+  },
+  {
     label: 'Wallets',
     icon: 'fa6-solid:wallet',
     to: '/wallets'

@@ -8,11 +8,13 @@ useHead({
 const wallets = useWallets()
 const buckets = useBuckets()
 const categories = useCategories()
+const earnings = useEarnings()
 
 onMounted(() => {
   wallets.fetchItems()
   buckets.fetchItems()
   categories.fetchItems()
+  earnings.fetchItems()
 })
 </script>
 
