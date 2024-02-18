@@ -2,13 +2,11 @@
 import type { SelectOption } from '~/types/select-option'
 
 withDefaults(defineProps<{
-  placeholder?: string
   label?: string
   icon?: string
   required?: boolean
   options: SelectOption[]
 }>(), {
-  placeholder: '',
   label: '',
   icon: '',
   required: false
@@ -30,10 +28,6 @@ const value = defineModel({ default: '' })
         :required="required"
         class="form-select"
       >
-        <option v-if="placeholder" value="">
-          {{ placeholder }}
-        </option>
-
         <option
           v-for="(o, i) in options"
           :key="i"
@@ -53,10 +47,6 @@ const value = defineModel({ default: '' })
       :required="required"
       class="form-select"
     >
-      <option v-if="placeholder" value="">
-        {{ placeholder }}
-      </option>
-
       <option
         v-for="(o, i) in options"
         :key="i"
