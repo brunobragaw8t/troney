@@ -50,21 +50,21 @@ export type Database = {
           id: number
           name: string
           update_at: string | null
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string
           id?: number
           name: string
           update_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Update: {
           created_at?: string
           id?: number
           name?: string
           update_at?: string | null
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -76,9 +76,128 @@ export type Database = {
           }
         ]
       }
+      earnings: {
+        Row: {
+          created_at: string
+          description: string
+          id: number
+          source: string
+          update_at: string | null
+          user_id: string
+          value: number
+          wallet_id: number
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          id?: number
+          source?: string
+          update_at?: string | null
+          user_id?: string
+          value: number
+          wallet_id: number
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          id?: number
+          source?: string
+          update_at?: string | null
+          user_id?: string
+          value?: number
+          wallet_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_earnings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_earnings_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      expenses: {
+        Row: {
+          bucket_id: number
+          category_id: number
+          created_at: string
+          description: string
+          id: number
+          notes: string
+          quantity: number
+          updated_at: string | null
+          user_id: string
+          value: number
+          wallet_id: number
+        }
+        Insert: {
+          bucket_id: number
+          category_id: number
+          created_at?: string
+          description: string
+          id?: number
+          notes?: string
+          quantity?: number
+          updated_at?: string | null
+          user_id?: string
+          value: number
+          wallet_id: number
+        }
+        Update: {
+          bucket_id?: number
+          category_id?: number
+          created_at?: string
+          description?: string
+          id?: number
+          notes?: string
+          quantity?: number
+          updated_at?: string | null
+          user_id?: string
+          value?: number
+          wallet_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_expenses_bucket_id_fkey"
+            columns: ["bucket_id"]
+            isOneToOne: false
+            referencedRelation: "buckets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_expenses_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_expenses_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_expenses_wallet_id_fkey"
+            columns: ["wallet_id"]
+            isOneToOne: false
+            referencedRelation: "wallets"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       wallets: {
         Row: {
-          created_at: string | null
+          created_at: string
           id: number
           initial_balance: number
           name: string
@@ -86,7 +205,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          created_at?: string | null
+          created_at?: string
           id?: number
           initial_balance?: number
           name: string
@@ -94,7 +213,7 @@ export type Database = {
           user_id?: string
         }
         Update: {
-          created_at?: string | null
+          created_at?: string
           id?: number
           initial_balance?: number
           name?: string
