@@ -32,6 +32,7 @@ const value = defineModel()
         :placeholder="placeholder"
         :required="required"
         class="form-control"
+        :step="'number' === type ? '0.01' : undefined"
       >
 
       <label :for="$.uid.toString()">{{ label }}</label>
@@ -45,6 +46,7 @@ const value = defineModel()
       :placeholder="placeholder"
       :required="required"
       class="form-control"
+      :step="'number' === type ? '0.01' : undefined"
     >
   </div>
 </template>
