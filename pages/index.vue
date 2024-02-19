@@ -41,6 +41,24 @@ function nextMonth () {
 }
 
 const wallets = useWallets().items
+
+const earnings = useEarnings().items
+
+const buckets = computed(() => {
+  return useBuckets().items.value.map((b) => {
+    return {
+      id: b.id,
+      name: b.name,
+      value: earnings.value
+        .filter((e) => {
+          const date = new Date(e.created_at).getTime()
+          const max = new Date(year.value, month.value, 0).getTime()
+          return date <= max
+        })
+        .reduce((acc, e) => acc + e.value * b.percentage / 100, 0)
+    }
+  })
+})
 </script>
 
 <template>
@@ -76,6 +94,16 @@ const wallets = useWallets().items
         :balance="w.initial_balance"
         class="flex-fill"
       />
+    </div>
+
+    <div class="d-flex gap-2">
+      <div
+        v-for="b in buckets"
+        :key="b.id"
+        class="flex-fill"
+      >
+        {{ b }}
+      </div>
     </div>
 
     <p>{{ route.query }}</p>
