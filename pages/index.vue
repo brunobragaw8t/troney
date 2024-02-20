@@ -86,7 +86,7 @@ const buckets = computed(() => {
       </div>
     </div>
 
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2 mb-3">
       <WalletCard
         v-for="w in wallets"
         :key="w.id"
@@ -97,13 +97,13 @@ const buckets = computed(() => {
     </div>
 
     <div class="d-flex gap-2">
-      <div
+      <BucketCard
         v-for="b in buckets"
         :key="b.id"
         class="flex-fill"
-      >
-        {{ b }}
-      </div>
+        :name="b.name"
+        :value="b.value"
+      />
     </div>
 
     <p>{{ route.query }}</p>
