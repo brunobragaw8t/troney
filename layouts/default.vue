@@ -19,6 +19,11 @@ const navItems = [
     to: '/earnings'
   },
   {
+    label: 'Expenses',
+    icon: 'fa6-solid:money-bill-transfer',
+    to: '/expenses'
+  },
+  {
     label: 'Wallets',
     icon: 'fa6-solid:wallet',
     to: '/wallets'
