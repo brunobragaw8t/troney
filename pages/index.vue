@@ -13,10 +13,6 @@ if (
   month.value = parseInt(monthStr)
 }
 
-const daysInMonth = computed(() => {
-  return new Date(year.value, month.value, 0).getDate()
-})
-
 const monthName = computed(() => {
   return new Date(year.value, month.value - 1)
     .toLocaleString('en-GB', { month: 'long' })
@@ -120,10 +116,5 @@ const buckets = computed(() => {
       />
     </div>
 
-    <p>{{ route.query }}</p>
-    <p>{{ year }}</p>
-    <p>{{ month }}</p>
-    <p>{{ daysInMonth }}</p>
-    <p>{{ monthName }}</p>
   </div>
 </template>
