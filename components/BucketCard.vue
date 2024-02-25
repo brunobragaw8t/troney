@@ -20,7 +20,7 @@ const color = computed(() => {
 </script>
 
 <template>
-  <div :class="`alert alert-${color}`">
+  <div :class="`alert alert-${color} mb-0`">
     <div class="d-flex align-items-center gap-1 mb-1">
       <Icon name="fa6-solid:bucket" />
 
