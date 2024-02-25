@@ -48,7 +48,7 @@ async function signOut () {
 
 <template>
   <div class="d-flex min-vh-100">
-    <div class="py-5 bg-secondary-subtle" style="width: 200px">
+    <div class="flex-shrink-0 py-5 bg-secondary-subtle" style="width: 200px">
       <h5 class="mb-3 px-3">
         {{ welcome }}
       </h5>
