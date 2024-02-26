@@ -97,7 +97,11 @@ async function deleteItem (id: number) {
         </thead>
 
         <tbody>
-          <tr v-for="item in items" :key="item.id">
+          <tr
+            v-for="item in items"
+            :key="item.id"
+            :style="`border-left: 4px solid ${item.color}`"
+          >
             <td>{{ item.name }}</td>
 
             <td>
