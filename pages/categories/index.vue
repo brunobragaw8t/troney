@@ -2,12 +2,13 @@
 import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
+const categories = useCategories()
 
 /**
  * States
  */
 
-const items = useCategories().items
+const items = categories.items
 
 const alert = ref({
   type: '',
@@ -49,6 +50,8 @@ async function deleteItem (id: number) {
     item.deleting = false
     return
   }
+
+  await categories.fetchItems()
 
   item.displayDeleteModal = false
   item.deleting = false
