@@ -46,6 +46,7 @@ export type Database = {
       }
       categories: {
         Row: {
+          color: string
           created_at: string
           id: number
           name: string
@@ -53,6 +54,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          color?: string
           created_at?: string
           id?: number
           name: string
@@ -60,6 +62,7 @@ export type Database = {
           user_id?: string
         }
         Update: {
+          color?: string
           created_at?: string
           id?: number
           name?: string
