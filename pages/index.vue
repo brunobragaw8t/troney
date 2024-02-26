@@ -113,7 +113,7 @@ const chartData = computed(() => ({
           .filter(e => e.category_id === c.id)
           .reduce((acc, e) => acc + e.value * e.quantity, 0)
       }),
-      backgroundColor: categories.value.map(() => getRandomColor()),
+      backgroundColor: categories.value.map(c => c.color || getRandomColor()),
       borderWidth: 0
     }
   ]
