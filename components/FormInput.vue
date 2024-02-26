@@ -1,6 +1,6 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  type: 'text' | 'password' | 'email' | 'number'
+  type: 'text' | 'password' | 'email' | 'number' | 'color'
   placeholder?: string
   label?: string
   icon?: string
