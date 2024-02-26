@@ -4,7 +4,8 @@ import type { Database } from '~/types/supabase'
 const sbClient = useSupabaseClient<Database>()
 
 const payload = ref({
-  name: ''
+  name: '',
+  color: ''
 })
 
 const isLoading = ref(false)
@@ -19,7 +20,8 @@ async function create () {
 
   const { data, error } = await sbClient.from('categories')
     .insert([{
-      name: payload.value.name
+      name: payload.value.name,
+      color: payload.value.color
     }])
     .select()
 
@@ -39,7 +41,9 @@ async function create () {
     message: 'Category created successfully. Redirecting...'
   }
 
-  setTimeout(() => navigateTo('/categories'), 2000)
+  await useCategories().fetchItems()
+
+  navigateTo('/categories')
 
   return data
 }
@@ -60,6 +64,16 @@ async function create () {
           icon="fa6-regular:folder-open"
           :required="true"
           :focus="true"
+        />
+      </div>
+
+      <div class="mb-3">
+        <FormInput
+          v-model="payload.color"
+          type="color"
+          label="Color"
+          icon="fa6-solid:palette"
+          :required="true"
         />
       </div>
 

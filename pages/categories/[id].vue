@@ -9,7 +9,8 @@ const route = useRoute()
  */
 
 const payload = ref({
-  name: ''
+  name: '',
+  color: ''
 })
 
 const isLoading = ref(true)
@@ -33,13 +34,15 @@ async function fetchItem () {
   if (
     error ||
     !data[0] ||
-    data[0].name === null
+    data[0].name === null ||
+    data[0].color === null
   ) {
     navigateTo('/categories')
     return
   }
 
   payload.value.name = data[0].name
+  payload.value.color = data[0].color
 
   isLoading.value = false
 }
@@ -49,7 +52,8 @@ async function updateItem () {
 
   const { data, error } = await sbClient.from('categories')
     .update({
-      name: payload.value.name
+      name: payload.value.name,
+      color: payload.value.color
     })
     .eq('id', route.params.id)
     .select()
@@ -70,7 +74,9 @@ async function updateItem () {
     message: 'Category updated successfully. Redirecting...'
   }
 
-  setTimeout(() => navigateTo('/categories'), 2000)
+  await useCategories().fetchItems()
+
+  navigateTo('/categories')
 
   return data
 }
@@ -103,6 +109,16 @@ onMounted(() => {
           icon="fa6-regular:folder-open"
           :required="true"
           :focus="true"
+        />
+      </div>
+
+      <div class="mb-3">
+        <FormInput
+          v-model="payload.color"
+          type="color"
+          label="Color"
+          icon="fa6-solid:palette"
+          :required="true"
         />
       </div>
 
