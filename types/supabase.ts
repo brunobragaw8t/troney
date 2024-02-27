@@ -82,6 +82,7 @@ export type Database = {
       earnings: {
         Row: {
           created_at: string
+          date: string
           description: string
           id: number
           source: string
@@ -92,6 +93,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          date: string
           description: string
           id?: number
           source?: string
@@ -102,6 +104,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          date?: string
           description?: string
           id?: number
           source?: string
@@ -132,6 +135,7 @@ export type Database = {
           bucket_id: number
           category_id: number
           created_at: string
+          date: string
           description: string
           id: number
           notes: string
@@ -145,6 +149,7 @@ export type Database = {
           bucket_id: number
           category_id: number
           created_at?: string
+          date: string
           description: string
           id?: number
           notes?: string
@@ -158,6 +163,7 @@ export type Database = {
           bucket_id?: number
           category_id?: number
           created_at?: string
+          date?: string
           description?: string
           id?: number
           notes?: string
