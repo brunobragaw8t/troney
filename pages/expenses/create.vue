@@ -43,7 +43,8 @@ const payload = ref({
   description: '',
   quantity: 1,
   value: 0,
-  notes: ''
+  notes: '',
+  date: new Date().toISOString().slice(0, 10)
 })
 
 const isLoading = ref(false)
@@ -64,7 +65,8 @@ async function create () {
       description: payload.value.description,
       quantity: payload.value.quantity,
       value: payload.value.value,
-      notes: payload.value.notes
+      notes: payload.value.notes,
+      date: payload.value.date
     }])
     .select()
 
@@ -167,6 +169,14 @@ async function create () {
         v-model="payload.notes"
         type="text"
         label="Notes"
+        class="mb-3"
+      />
+
+      <FormInput
+        v-model="payload.date"
+        type="date"
+        label="Date"
+        :required="true"
         class="mb-3"
       />
 

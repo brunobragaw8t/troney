@@ -48,7 +48,8 @@ const payload = ref({
   description: '',
   quantity: 1,
   value: 0,
-  notes: ''
+  notes: '',
+  date: new Date().toISOString().slice(0, 10)
 })
 
 const isLoading = ref(true)
@@ -78,7 +79,8 @@ async function fetchItem () {
     data[0].quantity === null ||
     data[0].description === null ||
     data[0].value === null ||
-    data[0].notes === null
+    data[0].notes === null ||
+    data[0].date === null
   ) {
     navigateTo('/expenses')
     return
@@ -91,6 +93,7 @@ async function fetchItem () {
   payload.value.description = data[0].description
   payload.value.value = data[0].value
   payload.value.notes = data[0].notes
+  payload.value.date = data[0].date
 
   isLoading.value = false
 }
@@ -106,7 +109,8 @@ async function updateItem () {
       description: payload.value.description,
       quantity: payload.value.quantity,
       value: payload.value.value,
-      notes: payload.value.notes
+      notes: payload.value.notes,
+      date: payload.value.date
     })
     .eq('id', route.params.id)
     .select()
@@ -222,6 +226,14 @@ onMounted(() => {
         v-model="payload.notes"
         type="text"
         label="Notes"
+        class="mb-3"
+      />
+
+      <FormInput
+        v-model="payload.date"
+        type="date"
+        label="Date"
+        :required="true"
         class="mb-3"
       />
 

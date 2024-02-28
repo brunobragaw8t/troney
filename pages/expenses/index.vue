@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { sortByDateDesc } from '~/helpers/sort-by-date-desc'
 import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
@@ -8,7 +9,7 @@ const expenses = useExpenses()
  * States
  */
 
-const items = expenses.items
+const items = ref(sortByDateDesc(expenses.items.value))
 
 const alert = ref({
   type: '',
@@ -90,6 +91,8 @@ async function deleteItem (id: number) {
           <tr>
             <th>Name</th>
 
+            <th>Date</th>
+
             <th class="text-end">
               Actions
             </th>
@@ -99,6 +102,8 @@ async function deleteItem (id: number) {
         <tbody>
           <tr v-for="item in items" :key="item.id">
             <td>{{ item.description }}</td>
+
+            <td>{{ item.date }}</td>
 
             <td>
               <div class="d-flex justify-content-end gap-2">
