@@ -60,7 +60,7 @@ const buckets = computed(() => {
 
     value += earnings.value
       .filter((e) => {
-        const date = new Date(e.created_at).getTime()
+        const date = new Date(e.date).getTime()
         const max = new Date(year.value, month.value, 0).getTime()
         return date <= max
       })
@@ -69,7 +69,7 @@ const buckets = computed(() => {
     value -= expenses.value
       .filter(e => e.bucket_id === b.id)
       .filter((e) => {
-        const date = new Date(e.created_at).getTime()
+        const date = new Date(e.date).getTime()
         const max = new Date(year.value, month.value, 0).getTime()
         return date <= max
       })
@@ -95,7 +95,7 @@ ChartJS.register(
 const expensesThisMonth = computed(() => {
   return expenses.value
     .filter((e) => {
-      const date = new Date(e.created_at).getTime()
+      const date = new Date(e.date).getTime()
       const min = new Date(year.value, month.value - 1, 1).getTime()
       const max = new Date(year.value, month.value, 0).getTime()
       return date >= min && date <= max
