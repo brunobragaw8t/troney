@@ -23,7 +23,8 @@ const payload = ref({
   wallet_id: 0,
   description: '',
   value: 0,
-  source: ''
+  source: '',
+  date: new Date().toISOString().slice(0, 10)
 })
 
 const isLoading = ref(true)
@@ -50,7 +51,8 @@ async function fetchItem () {
     data[0].wallet_id === null ||
     data[0].description === null ||
     data[0].value === null ||
-    data[0].source === null
+    data[0].source === null ||
+    data[0].date === null
   ) {
     navigateTo('/earnings')
     return
@@ -60,6 +62,7 @@ async function fetchItem () {
   payload.value.description = data[0].description
   payload.value.value = data[0].value
   payload.value.source = data[0].source
+  payload.value.date = data[0].date
 
   isLoading.value = false
 }
@@ -72,7 +75,8 @@ async function updateItem () {
       wallet_id: payload.value.wallet_id,
       description: payload.value.description,
       value: payload.value.value,
-      source: payload.value.source
+      source: payload.value.source,
+      date: payload.value.date
     })
     .eq('id', route.params.id)
     .select()
@@ -158,6 +162,15 @@ onMounted(() => {
             :required="true"
           />
         </div>
+      </div>
+
+      <div class="mb-3">
+        <FormInput
+          v-model="payload.date"
+          type="date"
+          label="Date"
+          :required="true"
+        />
       </div>
 
       <div v-if="alert.type" :class="`alert alert-${alert.type}`">

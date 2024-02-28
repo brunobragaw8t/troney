@@ -18,7 +18,8 @@ const payload = ref({
   wallet_id: 0,
   description: '',
   value: 0,
-  source: ''
+  source: '',
+  date: new Date().toISOString().slice(0, 10)
 })
 
 const isLoading = ref(false)
@@ -36,7 +37,8 @@ async function create () {
       wallet_id: payload.value.wallet_id,
       description: payload.value.description,
       value: payload.value.value,
-      source: payload.value.source
+      source: payload.value.source,
+      date: payload.value.date
     }])
     .select()
 
@@ -109,6 +111,15 @@ async function create () {
             :required="true"
           />
         </div>
+      </div>
+
+      <div class="mb-3">
+        <FormInput
+          v-model="payload.date"
+          type="date"
+          label="Date"
+          :required="true"
+        />
       </div>
 
       <div v-if="alert.type" :class="`alert alert-${alert.type}`">
