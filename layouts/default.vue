@@ -11,32 +11,38 @@ const navItems = [
   {
     label: 'Home',
     icon: 'fa6-solid:house',
-    to: '/'
+    to: '/',
+    keymap: 'H'
   },
   {
     label: 'Earnings',
     icon: 'fa6-solid:circle-dollar-to-slot',
-    to: '/earnings'
+    to: '/earnings',
+    keymap: 'R'
   },
   {
     label: 'Expenses',
     icon: 'fa6-solid:money-bill-transfer',
-    to: '/expenses'
+    to: '/expenses',
+    keymap: 'X'
   },
   {
     label: 'Wallets',
     icon: 'fa6-solid:wallet',
-    to: '/wallets'
+    to: '/wallets',
+    keymap: 'W'
   },
   {
     label: 'Buckets',
     icon: 'fa6-solid:bucket',
-    to: '/buckets'
+    to: '/buckets',
+    keymap: 'B'
   },
   {
     label: 'Categories',
     icon: 'fa6-regular:folder-open',
-    to: '/categories'
+    to: '/categories',
+    keymap: 'C'
   }
 ]
 
@@ -57,6 +63,7 @@ async function signOut () {
         <NuxtLink
           v-for="item in navItems"
           :key="item.to"
+          v-keymap="item.keymap"
           :to="item.to"
           class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center"
           :class="{ active: route.path === item.to }"
