@@ -41,7 +41,9 @@ async function createWallet () {
     message: 'Wallet created successfully. Redirecting...'
   }
 
-  setTimeout(() => navigateTo('/wallets'), 2000)
+  await useWallets().fetchItems()
+
+  navigateTo('/wallets')
 
   return data
 }

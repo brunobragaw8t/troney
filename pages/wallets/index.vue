@@ -2,12 +2,13 @@
 import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
+const wallets = useWallets()
 
 /**
  * States
  */
 
-const wallets = useWallets().items
+const items = wallets.items
 
 const alert = ref({
   type: '',
@@ -15,7 +16,7 @@ const alert = ref({
 })
 
 function closeDeletionModals () {
-  wallets.value.forEach((w) => { w.displayDeleteModal = false })
+  items.value.forEach((w) => { w.displayDeleteModal = false })
 }
 
 /**
@@ -26,7 +27,7 @@ async function deleteWallet (id: number) {
   alert.value.type = ''
   alert.value.message = ''
 
-  const wallet = wallets.value.find(w => w.id === id)
+  const wallet = items.value.find(w => w.id === id)
 
   if (!wallet) {
     alert.value.type = 'danger'
@@ -49,6 +50,8 @@ async function deleteWallet (id: number) {
     wallet.deleting = false
     return
   }
+
+  await wallets.fetchItems()
 
   wallet.displayDeleteModal = false
   wallet.deleting = false
@@ -73,7 +76,7 @@ async function deleteWallet (id: number) {
       />
     </div>
 
-    <div v-if="!wallets.length">
+    <div v-if="!items.length">
       No wallets
     </div>
 
@@ -94,7 +97,7 @@ async function deleteWallet (id: number) {
         </thead>
 
         <tbody>
-          <tr v-for="wallet in wallets" :key="wallet.id">
+          <tr v-for="wallet in items" :key="wallet.id">
             <td>{{ wallet.name }}</td>
 
             <td>
