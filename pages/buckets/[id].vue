@@ -74,7 +74,9 @@ async function updateItem () {
     message: 'Bucket updated successfully. Redirecting...'
   }
 
-  setTimeout(() => navigateTo('/buckets'), 2000)
+  await useBuckets().fetchItems()
+
+  navigateTo('/buckets')
 
   return data
 }
