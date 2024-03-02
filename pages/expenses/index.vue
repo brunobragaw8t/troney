@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { sortByDateDesc } from '~/helpers/sort-by-date-desc'
 import type { Database } from '~/types/supabase'
 
 const sbClient = useSupabaseClient<Database>()
@@ -9,7 +8,7 @@ const expenses = useExpenses()
  * States
  */
 
-const items = ref(sortByDateDesc(expenses.items.value))
+const items = expenses.items
 
 const alert = ref({
   type: '',

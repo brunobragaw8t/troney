@@ -1,3 +1,4 @@
+import { sortByDateDesc } from '~/helpers/sort-by-date-desc'
 import type { Database } from '~/types/supabase'
 
 type ExpenseListItem = Database['public']['Tables']['expenses']['Row'] & {
@@ -31,7 +32,7 @@ export const useExpenses = () => {
   }
 
   function setItems (data: ExpenseListItem[]) {
-    items.value = data
+    items.value = sortByDateDesc(data)
   }
 
   return { items, fetchItems, setItems }
