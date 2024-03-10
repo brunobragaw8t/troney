@@ -11,6 +11,8 @@ import {
 } from 'chart.js'
 import { getRandomColor } from '~/helpers/get-random-color'
 
+useHead({ title: 'Dashboard - Troney' })
+
 const route = useRoute()
 
 const year = ref(new Date().getFullYear())

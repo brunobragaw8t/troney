@@ -3,6 +3,8 @@ definePageMeta({
   layout: 'auth'
 })
 
+useHead({ title: 'Troney' })
+
 const form = ref('signIn')
 
 const user = useSupabaseUser()

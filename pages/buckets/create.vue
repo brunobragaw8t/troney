@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Database } from '~/types/supabase'
 
+useHead({ title: 'Create bucket - Troney' })
+
 const sbClient = useSupabaseClient<Database>()
 
 const payload = ref({

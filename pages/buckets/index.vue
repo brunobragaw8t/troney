@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Database } from '~/types/supabase'
 
+useHead({ title: 'Buckets - Troney' })
+
 const sbClient = useSupabaseClient<Database>()
 const buckets = useBuckets()
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Database } from '~/types/supabase'
 
+useHead({ title: 'Earnings - Troney' })
+
 const sbClient = useSupabaseClient<Database>()
 const earnings = useEarnings()
 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Database } from '~/types/supabase'
 
+useHead({ title: 'Edit bucket - Troney' })
+
 const sbClient = useSupabaseClient<Database>()
 const route = useRoute()
 
