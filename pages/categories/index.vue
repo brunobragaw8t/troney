@@ -70,7 +70,7 @@ async function deleteItem (id: number) {
       </h1>
 
       <AppButton
-        v-keymap="'N'"
+        data-keymap="N"
         label="Create"
         icon="fa6-solid:circle-plus"
         icon-position="right"

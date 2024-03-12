@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { bindKeymapFunctionality } from './helpers/click-with-keymap'
+
 useHead({
   htmlAttrs: {
     'data-bs-theme': 'dark'
@@ -17,6 +19,7 @@ onMounted(() => {
   categories.fetchItems()
   earnings.fetchItems()
   expenses.fetchItems()
+  bindKeymapFunctionality()
 })
 </script>
 

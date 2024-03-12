@@ -133,15 +133,15 @@ const chartOptions = ref({
 
       <div class="d-flex gap-1">
         <AppButton
-          v-keymap="'H'"
           icon="fa6-solid:angle-left"
           size="sm"
           variant="secondary"
+          data-keymap="H"
           @click="previousMonth"
         />
 
         <AppButton
-          v-keymap="'L'"
+          data-keymap="L"
           icon="fa6-solid:angle-right"
           icon-position="right"
           size="sm"

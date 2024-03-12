@@ -63,7 +63,7 @@ async function signOut () {
         <NuxtLink
           v-for="item in navItems"
           :key="item.to"
-          v-keymap="item.keymap"
+          :data-keymap="item.keymap"
           :to="item.to"
           class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center"
           :class="{ active: route.path === item.to }"
