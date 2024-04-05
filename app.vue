@@ -24,9 +24,8 @@ function fetchItems () {
 onMounted(() => {
   fetchItems()
   bindKeymapFunctionality()
+  useSupabaseClient().auth.onAuthStateChange(fetchItems)
 })
-
-useSupabaseClient().auth.onAuthStateChange(fetchItems)
 </script>
 
 <template>
