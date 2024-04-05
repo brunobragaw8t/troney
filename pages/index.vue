@@ -50,11 +50,40 @@ function nextMonth () {
   }
 }
 
-const wallets = useWallets().items
 const categories = useCategories().items
 
 const earnings = useEarnings().items
 const expenses = useExpenses().items
+
+const wallets = computed(() => {
+  return useWallets().items.value.map((w) => {
+    let value = w.initial_balance
+
+    value += earnings.value
+      .filter(e => e.wallet_id === w.id)
+      .filter((e) => {
+        const date = new Date(e.date).getTime()
+        const max = new Date(year.value, month.value, 0).getTime()
+        return date <= max
+      })
+      .reduce((acc, e) => acc + e.value, 0)
+
+    value -= expenses.value
+      .filter(e => e.wallet_id === w.id)
+      .filter((e) => {
+        const date = new Date(e.date).getTime()
+        const max = new Date(year.value, month.value, 0).getTime()
+        return date <= max
+      })
+      .reduce((acc, e) => acc + e.value * e.quantity, 0)
+
+    return {
+      id: w.id,
+      name: w.name,
+      value
+    }
+  })
+})
 
 const buckets = computed(() => {
   return useBuckets().items.value.map((b) => {
@@ -156,7 +185,7 @@ const chartOptions = ref({
         v-for="w in wallets"
         :key="w.id"
         :name="w.name"
-        :balance="w.initial_balance"
+        :balance="w.value"
         class="flex-fill"
       />
     </div>
