@@ -136,12 +136,12 @@ const chartOptions = ref({
           icon="fa6-solid:angle-left"
           size="sm"
           variant="secondary"
-          data-keymap="H"
+          data-keymap="P"
           @click="previousMonth"
         />
 
         <AppButton
-          data-keymap="L"
+          data-keymap="N"
           icon="fa6-solid:angle-right"
           icon-position="right"
           size="sm"
