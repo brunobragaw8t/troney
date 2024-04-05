@@ -13,14 +13,20 @@ const categories = useCategories()
 const earnings = useEarnings()
 const expenses = useExpenses()
 
-onMounted(() => {
+function fetchItems () {
   wallets.fetchItems()
   buckets.fetchItems()
   categories.fetchItems()
   earnings.fetchItems()
   expenses.fetchItems()
+}
+
+onMounted(() => {
+  fetchItems()
   bindKeymapFunctionality()
 })
+
+useSupabaseClient().auth.onAuthStateChange(fetchItems)
 </script>
 
 <template>
