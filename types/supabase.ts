@@ -220,7 +220,7 @@ export type Database = {
           description?: string
           id?: number
           updated_at?: string | null
-          user_id: string
+          user_id?: string
           value: number
           wallet_id_from?: number | null
           wallet_id_to?: number | null
