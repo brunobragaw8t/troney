@@ -92,6 +92,8 @@ async function deleteItem (id: number) {
           <tr>
             <th>Name</th>
 
+            <th>Percentage</th>
+
             <th class="text-end">
               Actions
             </th>
@@ -101,6 +103,8 @@ async function deleteItem (id: number) {
         <tbody>
           <tr v-for="item in items" :key="item.id">
             <td>{{ item.name }}</td>
+
+            <td>{{ item.percentage }} %</td>
 
             <td>
               <div class="d-flex justify-content-end gap-2">
