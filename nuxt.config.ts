@@ -10,6 +10,9 @@ export default defineNuxtConfig({
       callback: '/confirm'
     }
   },
+  typescript: {
+    typeCheck: true
+  },
   vite: {
     vue: {
       script: {
