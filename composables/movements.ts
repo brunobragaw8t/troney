@@ -1,7 +1,7 @@
 import { sortByDateDesc } from '~/helpers/sort-by-date-desc'
-import type { Database } from '~/types/supabase'
+import type { Tables } from '~/types/supabase'
 
-type MovementListItem = Database['public']['Tables']['movements']['Row'] & {
+type MovementListItem = Tables<'movements'> & {
   displayDeleteModal: boolean
   deleting: boolean
 }
@@ -10,21 +10,19 @@ export const useMovements = () => {
   const items = useState<MovementListItem[]>('movements', () => [])
 
   async function fetchItems () {
-    const { data, error } = await useFetch('/api/movements', {
-      cache: 'no-cache'
-    })
+    let data: Tables<'movements'>[] = []
 
-    if (error.value) {
-      return
-    }
+    try {
+      const res = await $fetch('/api/movements', { cache: 'no-cache' })
 
-    if (!Array.isArray(data.value)) {
-      setItems([])
-      return
+      if (Array.isArray(res)) {
+        data = res
+      }
+    } catch {
     }
 
     setItems(
-      data.value.map(item => ({
+      data.map(item => ({
         ...item,
         displayDeleteModal: false,
         deleting: false
