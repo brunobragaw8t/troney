@@ -27,6 +27,12 @@ const navItems = [
     keymap: 'X'
   },
   {
+    label: 'Movements',
+    icon: 'fa6-solid:arrow-right-arrow-left',
+    to: '/movements',
+    keymap: 'M'
+  },
+  {
     label: 'Wallets',
     icon: 'fa6-solid:wallet',
     to: '/wallets',
