@@ -1,6 +1,6 @@
 import { serverSupabaseClient } from '#supabase/server'
 import { z } from 'zod'
-import { Database, TablesInsert } from '~/types/supabase'
+import type { Database, TablesInsert } from '~/types/supabase'
 
 const createMovementSchema = z.object({
   description: z.string(),
