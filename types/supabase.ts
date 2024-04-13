@@ -207,6 +207,7 @@ export type Database = {
       movements: {
         Row: {
           created_at: string
+          date: string
           description: string
           id: number
           updated_at: string | null
@@ -217,6 +218,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          date: string
           description?: string
           id?: number
           updated_at?: string | null
@@ -227,6 +229,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          date?: string
           description?: string
           id?: number
           updated_at?: string | null
