@@ -7,24 +7,18 @@ useHead({
   }
 })
 
-const wallets = useWallets()
-const buckets = useBuckets()
-const categories = useCategories()
-const earnings = useEarnings()
-const expenses = useExpenses()
+useSupabaseClient().auth.onAuthStateChange((_, session) => {
+  if (!session) {
+    return
+  }
 
-function fetchItems () {
-  wallets.fetchItems()
-  buckets.fetchItems()
-  categories.fetchItems()
-  earnings.fetchItems()
-  expenses.fetchItems()
-}
+  useWallets().fetchItems()
+  useBuckets().fetchItems()
+  useCategories().fetchItems()
+  useEarnings().fetchItems()
+  useExpenses().fetchItems()
 
-onMounted(() => {
-  fetchItems()
   bindKeymapFunctionality()
-  useSupabaseClient().auth.onAuthStateChange(fetchItems)
 })
 </script>
 
