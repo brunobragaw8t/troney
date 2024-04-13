@@ -12,9 +12,5 @@ export default defineEventHandler(async (event) => {
     return error
   }
 
-  if (!data) {
-    return []
-  }
-
   return data
 })
