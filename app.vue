@@ -7,19 +7,21 @@ useHead({
   }
 })
 
-useSupabaseClient().auth.onAuthStateChange((_, session) => {
-  if (!session) {
-    return
-  }
+onMounted(() => {
+  useSupabaseClient().auth.onAuthStateChange((_, session) => {
+    if (!session) {
+      return
+    }
 
-  useWallets().fetchItems()
-  useBuckets().fetchItems()
-  useCategories().fetchItems()
-  useEarnings().fetchItems()
-  useExpenses().fetchItems()
-  useMovements().fetchItems()
+    useWallets().fetchItems()
+    useBuckets().fetchItems()
+    useCategories().fetchItems()
+    useEarnings().fetchItems()
+    useExpenses().fetchItems()
+    useMovements().fetchItems()
 
-  bindKeymapFunctionality()
+    bindKeymapFunctionality()
+  })
 })
 </script>
 
