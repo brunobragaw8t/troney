@@ -5,8 +5,9 @@ import type { Database, TablesInsert } from '~/types/supabase'
 const createMovementSchema = z.object({
   description: z.string(),
   wallet_id_from: z.union([z.number(), z.null()]),
+  value: z.number(),
   wallet_id_to: z.union([z.number(), z.null()]),
-  value: z.number()
+  date: z.string()
 })
 
 export default defineEventHandler(async (event) => {
@@ -27,8 +28,9 @@ export default defineEventHandler(async (event) => {
     .insert<TablesInsert<'movements'>>({
       description: body.description,
       wallet_id_from: body.wallet_id_from,
+      value: body.value,
       wallet_id_to: body.wallet_id_to,
-      value: body.value
+      date: body.date
     })
     .select()
 
