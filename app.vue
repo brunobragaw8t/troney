@@ -17,6 +17,7 @@ useSupabaseClient().auth.onAuthStateChange((_, session) => {
   useCategories().fetchItems()
   useEarnings().fetchItems()
   useExpenses().fetchItems()
+  useMovements().fetchItems()
 
   bindKeymapFunctionality()
 })
