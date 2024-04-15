@@ -54,6 +54,7 @@ const categories = useCategories().items
 
 const earnings = useEarnings().items
 const expenses = useExpenses().items
+const movements = useMovements().items
 
 const wallets = computed(() => {
   return useWallets().items.value.map((w) => {
@@ -76,6 +77,24 @@ const wallets = computed(() => {
         return date <= max
       })
       .reduce((acc, e) => acc + e.value * e.quantity, 0)
+
+    value += movements.value
+      .filter(m => m.wallet_id_to === w.id)
+      .filter((e) => {
+        const date = new Date(e.date).getTime()
+        const max = new Date(year.value, month.value, 0).getTime()
+        return date <= max
+      })
+      .reduce((acc, m) => acc + m.value, 0)
+
+    value -= movements.value
+      .filter(m => m.wallet_id_from === w.id)
+      .filter((e) => {
+        const date = new Date(e.date).getTime()
+        const max = new Date(year.value, month.value, 0).getTime()
+        return date <= max
+      })
+      .reduce((acc, m) => acc + m.value, 0)
 
     return {
       id: w.id,
