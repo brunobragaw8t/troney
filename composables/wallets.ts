@@ -1,3 +1,4 @@
+import { sortByKey } from '~/helpers/sort-by-key'
 import { type Database } from '~/types/supabase'
 
 type WalletListItem = Database['public']['Tables']['wallets']['Row'] & {
@@ -20,13 +21,15 @@ export const useWallets = () => {
     }
 
     if (data) {
-      setItems(
-        data.map(item => ({
-          ...item,
-          displayDeleteModal: false,
-          deleting: false
-        }))
-      )
+      const items = data.map(item => ({
+        ...item,
+        displayDeleteModal: false,
+        deleting: false
+      }))
+
+      const sortedItems = sortByKey(items, 'name')
+
+      setItems(sortedItems)
     }
   }
 
