@@ -32,6 +32,8 @@ const monthName = computed(() => {
     .toLocaleString('en-GB', { month: 'long' })
 })
 
+const maxDate = new Date(year.value, month.value, 0, 23, 59, 59).getTime()
+
 function previousMonth () {
   if (month.value === 1) {
     year.value--
@@ -63,36 +65,28 @@ const wallets = computed(() => {
     value += earnings.value
       .filter(e => e.wallet_id === w.id)
       .filter((e) => {
-        const date = new Date(e.date).getTime()
-        const max = new Date(year.value, month.value, 0).getTime()
-        return date <= max
+        return new Date(e.date).getTime() <= maxDate
       })
       .reduce((acc, e) => acc + e.value, 0)
 
     value -= expenses.value
       .filter(e => e.wallet_id === w.id)
       .filter((e) => {
-        const date = new Date(e.date).getTime()
-        const max = new Date(year.value, month.value, 0).getTime()
-        return date <= max
+        return new Date(e.date).getTime() <= maxDate
       })
       .reduce((acc, e) => acc + e.value * e.quantity, 0)
 
     value += movements.value
       .filter(m => m.wallet_id_to === w.id)
       .filter((e) => {
-        const date = new Date(e.date).getTime()
-        const max = new Date(year.value, month.value, 0).getTime()
-        return date <= max
+        return new Date(e.date).getTime() <= maxDate
       })
       .reduce((acc, m) => acc + m.value, 0)
 
     value -= movements.value
       .filter(m => m.wallet_id_from === w.id)
       .filter((e) => {
-        const date = new Date(e.date).getTime()
-        const max = new Date(year.value, month.value, 0).getTime()
-        return date <= max
+        return new Date(e.date).getTime() <= maxDate
       })
       .reduce((acc, m) => acc + m.value, 0)
 
@@ -110,18 +104,14 @@ const buckets = computed(() => {
 
     value += earnings.value
       .filter((e) => {
-        const date = new Date(e.date).getTime()
-        const max = new Date(year.value, month.value, 0).getTime()
-        return date <= max
+        return new Date(e.date).getTime() <= maxDate
       })
       .reduce((acc, e) => acc + e.value * b.percentage / 100, 0)
 
     value -= expenses.value
       .filter(e => e.bucket_id === b.id)
       .filter((e) => {
-        const date = new Date(e.date).getTime()
-        const max = new Date(year.value, month.value, 0).getTime()
-        return date <= max
+        return new Date(e.date).getTime() <= maxDate
       })
       .reduce((acc, e) => acc + e.value * e.quantity, 0)
 
@@ -147,7 +137,7 @@ const expensesThisMonth = computed(() => {
     .filter((e) => {
       const date = new Date(e.date).getTime()
       const min = new Date(year.value, month.value - 1, 1).getTime()
-      const max = new Date(year.value, month.value, 0).getTime()
+      const max = maxDate
       return date >= min && date <= max
     })
 })
