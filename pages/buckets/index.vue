@@ -17,6 +17,15 @@ const alert = ref({
   message: ''
 })
 
+const totalPercentage = computed(() => {
+  const number = items.value.reduce((acc, w) => acc + w.percentage, 0)
+
+  return {
+    number,
+    class: number === 100 ? 'text-success' : 'text-danger'
+  }
+})
+
 function closeDeletionModals () {
   items.value.forEach((w) => { w.displayDeleteModal = false })
 }
@@ -101,6 +110,18 @@ async function deleteItem (id: number) {
         </thead>
 
         <tbody>
+          <tr class="fw-bold">
+            <td>
+              Total
+            </td>
+
+            <td :class="totalPercentage.class">
+              {{ totalPercentage.number }} %
+            </td>
+
+            <td />
+          </tr>
+
           <tr v-for="item in items" :key="item.id">
             <td>{{ item.name }}</td>
 
