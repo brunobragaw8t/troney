@@ -14,6 +14,7 @@ withDefaults(defineProps<{
   focus: false
 })
 
+const id = useId()
 const value = defineModel()
 </script>
 
@@ -25,7 +26,7 @@ const value = defineModel()
 
     <div v-if="label" class="form-floating">
       <input
-        :id="$.uid.toString()"
+        :id="id"
         v-model="value"
         v-focus="focus"
         :type="type"
@@ -35,7 +36,7 @@ const value = defineModel()
         :step="'number' === type ? '0.01' : undefined"
       >
 
-      <label :for="$.uid.toString()">{{ label }}</label>
+      <label :for="id">{{ label }}</label>
     </div>
 
     <input
