@@ -1,4 +1,4 @@
-import { sortByDateDesc } from '~/helpers/sort-by-date-desc'
+import { sortByKeys } from '~/helpers/sort-by-keys'
 import type { Tables } from '~/types/supabase'
 
 type MovementListItem = Tables<'movements'> & {
@@ -31,7 +31,7 @@ export const useMovements = () => {
   }
 
   function setItems (data: MovementListItem[]) {
-    items.value = sortByDateDesc(data)
+    items.value = sortByKeys(data, 'desc', 'date', 'created_at')
   }
 
   return { items, fetchItems }

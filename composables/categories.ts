@@ -1,4 +1,4 @@
-import { sortByKey } from '~/helpers/sort-by-key'
+import { sortByKeys } from '~/helpers/sort-by-keys'
 import type { Database } from '~/types/supabase'
 
 type CategoryListItem = Database['public']['Tables']['categories']['Row'] & {
@@ -21,20 +21,18 @@ export const useCategories = () => {
     }
 
     if (data) {
-      const items = data.map(item => ({
-        ...item,
-        displayDeleteModal: false,
-        deleting: false
-      }))
-
-      const sortedItems = sortByKey(items, 'name')
-
-      setItems(sortedItems)
+      setItems(
+        data.map(item => ({
+          ...item,
+          displayDeleteModal: false,
+          deleting: false
+        }))
+      )
     }
   }
 
   function setItems (data: CategoryListItem[]) {
-    items.value = data
+    items.value = sortByKeys(data, 'asc', 'name')
   }
 
   return { items, fetchItems, setItems }
