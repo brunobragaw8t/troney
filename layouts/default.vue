@@ -60,12 +60,12 @@ async function signOut () {
 
 <template>
   <div class="d-flex min-vh-100">
-    <div class="flex-shrink-0 py-5 bg-secondary-subtle" style="width: 200px">
+    <div class="flex-shrink-0 pt-5 bg-secondary-subtle d-flex flex-column" style="width: 200px">
       <h5 class="mb-3 px-3">
         {{ welcome }}
       </h5>
 
-      <ul v-if="navItems.length" class="list-group list-group-flush">
+      <ul v-if="navItems.length" class="list-group list-group-flush flex-grow-1">
         <NuxtLink
           v-for="item in navItems"
           :key="item.to"
@@ -79,7 +79,7 @@ async function signOut () {
         </NuxtLink>
 
         <NuxtLink
-          class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center"
+          class="list-group-item list-group-item-action list-group-item-secondary d-flex justify-content-between align-items-center mt-auto"
           to="#"
           @click="signOut"
         >
@@ -92,9 +92,24 @@ async function signOut () {
       </ul>
     </div>
 
-    <div class="flex-grow-1 py-5 px-5">
-      <div class="container">
+    <div class="flex-grow-1 pt-5 px-5 d-flex flex-column">
+      <div class="container mb-5">
         <slot />
+      </div>
+
+      <div class="container mt-auto">
+        <div class="d-flex justify-content-between py-2 border-top text-secondary" style="font-size: 0.75rem">
+          <div>
+            Troney
+          </div>
+
+          <div>
+            by
+            <a href="https://github.com/brunobragaw8t" target="_blank">
+              Bruno Braga
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
