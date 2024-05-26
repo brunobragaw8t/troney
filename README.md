@@ -11,4 +11,4 @@ Some of its features are:
 - Monthly graphs;
 - Keyboard shortcuts for navigating the UI.
 
-Here's a [demo](https://serene-sorbet-62d98a.netlify.app/).
+Here's a [demo](https://troney.netlify.app/).
