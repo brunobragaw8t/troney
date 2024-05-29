@@ -10,16 +10,18 @@ const route = useRoute()
  * State
  */
 
-const wallets = [
-  {
-    value: 0,
-    label: 'Select wallet'
-  },
-  ...useWallets().items.value.map(w => ({
-    value: w.id,
-    label: w.name
-  }))
-]
+const wallets = computed(() => {
+  return [
+    {
+      value: 0,
+      label: 'Select wallet'
+    },
+    ...useWallets().items.value.map(w => ({
+      value: w.id,
+      label: w.name
+    }))
+  ]
+})
 
 const payload = ref({
   wallet_id: 0,

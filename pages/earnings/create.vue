@@ -5,16 +5,18 @@ useHead({ title: 'Create earning - Troney' })
 
 const sbClient = useSupabaseClient<Database>()
 
-const wallets = [
-  {
-    value: 0,
-    label: 'Select wallet'
-  },
-  ...useWallets().items.value.map(w => ({
-    value: w.id,
-    label: w.name
-  }))
-]
+const wallets = computed(() => {
+  return [
+    {
+      value: 0,
+      label: 'Select wallet'
+    },
+    ...useWallets().items.value.map(w => ({
+      value: w.id,
+      label: w.name
+    }))
+  ]
+})
 
 const payload = ref({
   wallet_id: 0,

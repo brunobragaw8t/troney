@@ -3,16 +3,18 @@ import { type TablesInsert } from '~/types/supabase'
 
 useHead({ title: 'Create movement - Troney' })
 
-const wallets = [
-  {
-    value: null,
-    label: 'Select wallet'
-  },
-  ...useWallets().items.value.map(w => ({
-    value: w.id,
-    label: w.name
-  }))
-]
+const wallets = computed(() => {
+  return [
+    {
+      value: null,
+      label: 'None'
+    },
+    ...useWallets().items.value.map(w => ({
+      value: w.id,
+      label: w.name
+    }))
+  ]
+})
 
 const payload = ref<TablesInsert<'movements'>>({
   description: '',

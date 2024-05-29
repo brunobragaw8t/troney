@@ -5,38 +5,44 @@ useHead({ title: 'Create expense - Troney' })
 
 const sbClient = useSupabaseClient<Database>()
 
-const wallets = [
-  {
-    value: 0,
-    label: 'Select wallet'
-  },
-  ...useWallets().items.value.map(w => ({
-    value: w.id,
-    label: w.name
-  }))
-]
+const wallets = computed(() => {
+  return [
+    {
+      value: 0,
+      label: 'Select wallet'
+    },
+    ...useWallets().items.value.map(w => ({
+      value: w.id,
+      label: w.name
+    }))
+  ]
+})
 
-const buckets = [
-  {
-    value: 0,
-    label: 'Select bucket'
-  },
-  ...useBuckets().items.value.map(i => ({
-    value: i.id,
-    label: i.name
-  }))
-]
+const buckets = computed(() => {
+  return [
+    {
+      value: 0,
+      label: 'Select bucket'
+    },
+    ...useBuckets().items.value.map(i => ({
+      value: i.id,
+      label: i.name
+    }))
+  ]
+})
 
-const categories = [
-  {
-    value: 0,
-    label: 'Select category'
-  },
-  ...useCategories().items.value.map(i => ({
-    value: i.id,
-    label: i.name
-  }))
-]
+const categories = computed(() => {
+  return [
+    {
+      value: 0,
+      label: 'Select category'
+    },
+    ...useCategories().items.value.map(i => ({
+      value: i.id,
+      label: i.name
+    }))
+  ]
+})
 
 const payload = ref({
   wallet_id: 0,

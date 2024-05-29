@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import type { Tables, TablesUpdate } from '~/types/supabase';
+import type { Tables, TablesUpdate } from '~/types/supabase'
 
 useHead({ title: 'Edit movement - Troney' })
 
 const id = useRoute().params.id
 
-const wallets = [
-  {
-    value: null,
-    label: 'None'
-  },
-  ...useWallets().items.value.map(w => ({
-    value: w.id,
-    label: w.name
-  }))
-]
+const wallets = computed(() => {
+  return [
+    {
+      value: null,
+      label: 'None'
+    },
+    ...useWallets().items.value.map(w => ({
+      value: w.id,
+      label: w.name
+    }))
+  ]
+})
 
 const payload = ref<TablesUpdate<'movements'>>({
   description: '',
@@ -47,7 +49,7 @@ async function fetchItem () {
     wallet_id_to: res.wallet_id_to,
     date: res.date
   }
-  
+
   isLoading.value = false
 }
 
