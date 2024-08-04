@@ -115,6 +115,20 @@ const buckets = computed(() => {
       })
       .reduce((acc, e) => acc + e.value * e.quantity, 0)
 
+    value += movements.value
+      .filter(m => m.bucket_id_to === b.id)
+      .filter((e) => {
+        return new Date(e.date).getTime() <= maxDate
+      })
+      .reduce((acc, m) => acc + m.value, 0)
+
+    value -= movements.value
+      .filter(m => m.bucket_id_from === b.id)
+      .filter((e) => {
+        return new Date(e.date).getTime() <= maxDate
+      })
+      .reduce((acc, m) => acc + m.value, 0)
+
     return {
       id: b.id,
       name: b.name,

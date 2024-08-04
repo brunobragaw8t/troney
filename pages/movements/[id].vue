@@ -18,11 +18,26 @@ const wallets = computed(() => {
   ]
 })
 
+const buckets = computed(() => {
+  return [
+    {
+      value: 0,
+      label: 'Select bucket'
+    },
+    ...useBuckets().items.value.map(i => ({
+      value: i.id,
+      label: i.name
+    }))
+  ]
+})
+
 const payload = ref<TablesUpdate<'movements'>>({
   description: '',
   wallet_id_from: null,
   value: 0,
   wallet_id_to: null,
+  bucket_id_from: 0,
+  bucket_id_to: 0,
   date: new Date().toISOString().slice(0, 10)
 })
 
@@ -131,6 +146,30 @@ async function updateItem () {
             icon="fa6-solid:wallet"
             :required="true"
             :options="wallets"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex gap-3 mb-3">
+        <div class="flex-fill">
+          <FormSelect
+            v-model="payload.bucket_id_from"
+            placeholder="Select bucket"
+            label="Bucket from"
+            icon="fa6-solid:wallet"
+            :required="true"
+            :options="buckets"
+          />
+        </div>
+
+        <div class="flex-fill">
+          <FormSelect
+            v-model="payload.bucket_id_to"
+            placeholder="Select bucket"
+            label="Bucket to"
+            icon="fa6-solid:wallet"
+            :required="true"
+            :options="buckets"
           />
         </div>
       </div>
