@@ -21,7 +21,7 @@ const wallets = computed(() => {
 const buckets = computed(() => {
   return [
     {
-      value: 0,
+      value: null,
       label: 'Select bucket'
     },
     ...useBuckets().items.value.map(i => ({
@@ -36,8 +36,8 @@ const payload = ref<TablesUpdate<'movements'>>({
   wallet_id_from: null,
   value: 0,
   wallet_id_to: null,
-  bucket_id_from: 0,
-  bucket_id_to: 0,
+  bucket_id_from: null,
+  bucket_id_to: null,
   date: new Date().toISOString().slice(0, 10)
 })
 
@@ -62,6 +62,8 @@ async function fetchItem () {
     wallet_id_from: res.wallet_id_from,
     value: res.value,
     wallet_id_to: res.wallet_id_to,
+    bucket_id_from: res.bucket_id_from,
+    bucket_id_to: res.bucket_id_to,
     date: res.date
   }
 
