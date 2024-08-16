@@ -22,7 +22,7 @@ const buckets = computed(() => {
   return [
     {
       value: null,
-      label: 'Select bucket'
+      label: 'None'
     },
     ...useBuckets().items.value.map(i => ({
       value: i.id,
@@ -34,9 +34,9 @@ const buckets = computed(() => {
 const payload = ref<TablesUpdate<'movements'>>({
   description: '',
   wallet_id_from: null,
+  bucket_id_from: null,
   value: 0,
   wallet_id_to: null,
-  bucket_id_from: null,
   bucket_id_to: null,
   date: new Date().toISOString().slice(0, 10)
 })
@@ -60,9 +60,9 @@ async function fetchItem () {
   payload.value = {
     description: res.description,
     wallet_id_from: res.wallet_id_from,
+    bucket_id_from: res.bucket_id_from,
     value: res.value,
     wallet_id_to: res.wallet_id_to,
-    bucket_id_from: res.bucket_id_from,
     bucket_id_to: res.bucket_id_to,
     date: res.date
   }
@@ -119,7 +119,7 @@ async function updateItem () {
         />
       </div>
 
-      <div class="d-flex gap-3 mb-3">
+      <div class="d-flex align-items-center gap-3 mb-3">
         <div class="flex-fill">
           <FormSelect
             v-model="payload.wallet_id_from"
@@ -128,6 +128,16 @@ async function updateItem () {
             icon="fa6-solid:wallet"
             :required="true"
             :options="wallets"
+            class="mb-3"
+          />
+
+          <FormSelect
+            v-model="payload.bucket_id_from"
+            placeholder="Select bucket"
+            label="Bucket from"
+            icon="fa6-solid:bucket"
+            :required="true"
+            :options="buckets"
           />
         </div>
 
@@ -148,28 +158,14 @@ async function updateItem () {
             icon="fa6-solid:wallet"
             :required="true"
             :options="wallets"
+            class="mb-3"
           />
-        </div>
-      </div>
 
-      <div class="d-flex gap-3 mb-3">
-        <div class="flex-fill">
-          <FormSelect
-            v-model="payload.bucket_id_from"
-            placeholder="Select bucket"
-            label="Bucket from"
-            icon="fa6-solid:wallet"
-            :required="true"
-            :options="buckets"
-          />
-        </div>
-
-        <div class="flex-fill">
           <FormSelect
             v-model="payload.bucket_id_to"
             placeholder="Select bucket"
             label="Bucket to"
-            icon="fa6-solid:wallet"
+            icon="fa6-solid:bucket"
             :required="true"
             :options="buckets"
           />
