@@ -215,6 +215,8 @@ export type Database = {
           value: number
           wallet_id_from: number | null
           wallet_id_to: number | null
+          bucket_id_from: number | null
+          bucket_id_to: number | null
         }
         Insert: {
           created_at?: string
@@ -226,6 +228,8 @@ export type Database = {
           value: number
           wallet_id_from?: number | null
           wallet_id_to?: number | null
+          bucket_id_from?: number | null
+          bucket_id_to?: number | null
         }
         Update: {
           created_at?: string
@@ -237,6 +241,8 @@ export type Database = {
           value?: number
           wallet_id_from?: number | null
           wallet_id_to?: number | null
+          bucket_id_from?: number | null
+          bucket_id_to?: number | null
         }
         Relationships: [
           {
@@ -258,6 +264,20 @@ export type Database = {
             columns: ['wallet_id_to']
             isOneToOne: false
             referencedRelation: 'wallets'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'public_movements_bucket_id_from_fkey'
+            columns: ['bucket_id_from']
+            isOneToOne: false
+            referencedRelation: 'buckets'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'public_movements_bucket_id_to_fkey'
+            columns: ['bucket_id_to']
+            isOneToOne: false
+            referencedRelation: 'buckets'
             referencedColumns: ['id']
           },
         ]
