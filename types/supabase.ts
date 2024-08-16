@@ -206,6 +206,8 @@ export type Database = {
       }
       movements: {
         Row: {
+          bucket_id_from: number | null
+          bucket_id_to: number | null
           created_at: string
           date: string
           description: string
@@ -215,10 +217,10 @@ export type Database = {
           value: number
           wallet_id_from: number | null
           wallet_id_to: number | null
-          bucket_id_from: number | null
-          bucket_id_to: number | null
         }
         Insert: {
+          bucket_id_from?: number | null
+          bucket_id_to?: number | null
           created_at?: string
           date: string
           description?: string
@@ -228,10 +230,10 @@ export type Database = {
           value: number
           wallet_id_from?: number | null
           wallet_id_to?: number | null
-          bucket_id_from?: number | null
-          bucket_id_to?: number | null
         }
         Update: {
+          bucket_id_from?: number | null
+          bucket_id_to?: number | null
           created_at?: string
           date?: string
           description?: string
@@ -241,10 +243,22 @@ export type Database = {
           value?: number
           wallet_id_from?: number | null
           wallet_id_to?: number | null
-          bucket_id_from?: number | null
-          bucket_id_to?: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: 'movements_bucket_id_from_fkey'
+            columns: ['bucket_id_from']
+            isOneToOne: false
+            referencedRelation: 'buckets'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'movements_bucket_id_to_fkey'
+            columns: ['bucket_id_to']
+            isOneToOne: false
+            referencedRelation: 'buckets'
+            referencedColumns: ['id']
+          },
           {
             foreignKeyName: 'public_movements_user_id_fkey'
             columns: ['user_id']
@@ -264,20 +278,6 @@ export type Database = {
             columns: ['wallet_id_to']
             isOneToOne: false
             referencedRelation: 'wallets'
-            referencedColumns: ['id']
-          },
-          {
-            foreignKeyName: 'public_movements_bucket_id_from_fkey'
-            columns: ['bucket_id_from']
-            isOneToOne: false
-            referencedRelation: 'buckets'
-            referencedColumns: ['id']
-          },
-          {
-            foreignKeyName: 'public_movements_bucket_id_to_fkey'
-            columns: ['bucket_id_to']
-            isOneToOne: false
-            referencedRelation: 'buckets'
             referencedColumns: ['id']
           },
         ]
